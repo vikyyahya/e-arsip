@@ -41,4 +41,8 @@ class User extends Authenticatable
     {
         return $this->belongsTo('App\Level', 'level', 'id');
     }
+    public function divisi()
+    {
+        return $this->belongsTo('App\Divisi', 'divisi_id', 'id');
+    }
 }

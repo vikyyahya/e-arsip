@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Dokumen;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class DokumenController extends Controller
 {
@@ -22,6 +24,7 @@ class DokumenController extends Controller
 
     public function create(Request $request)
     {
+        return $request;
         $request->validate([
             'nama_file' => 'required',
             'file' => 'required|max:2048',
@@ -32,9 +35,11 @@ class DokumenController extends Controller
         $fileName = $request->nama_file.'.'.$request->file->extension();  
         // return $fileName;
         $request->file->move(public_path('uploads'), $fileName);
+        $id_user = Auth::user()->id;
         Dokumen::create([
             'nama_file' => $fileName,
-            'keterangan' => $data['keterangan']
+            'keterangan' => $data['keterangan'],
+            'keterangan' => $id_user,
         ]);
         return redirect('/datadokumen')->with('sukses', 'Data Berhasil Di Upload!');
     }
@@ -48,6 +53,33 @@ class DokumenController extends Controller
         }
         $user->delete($user);
         return redirect('/datadokumen')->with('sukses', 'Data berhasil dihapus!');
+    }
+
+    public function tampilubah($id)
+    {
+        $dok = Dokumen::find($id);
+        $nama_file = $dok->nama_file;
+        $nm = explode(".",$nama_file);
+
+        return view('dokumen.ubahdokumen', ['dok' => $dok,'nama_file' => $nm[0]]);
+
+        
+    }
+
+    public function ubah(Request $request,$id)
+    {
+        $a = $request;
+        $request->validate([
+            'nama_file' => 'required',
+        ]);
+        $dok = Dokumen::find($id);
+        if($request->file != null){
+            $fileName = $request->nama_file.'.'.$request->file->extension();  
+            // return $fileName;
+            $request->file->move(public_path('uploads'), $fileName);
+        }
+        $dok->update($request->all());
+
     }
 
 }

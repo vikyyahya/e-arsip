@@ -39,6 +39,7 @@
                 <tr>
                     <th class="text-center">No</th>
                     <th class="text-center">Nama</th>
+                    <th class="text-center">Divisi</th>
                     <th class="text-center">Email</th>
                     <th class="text-center">Level</th>
                     <th class="text-center" width="8%">Action</th>
@@ -49,6 +50,7 @@
                 <tr>
                     <td>{{$loop->iteration}}</td>
                     <td>{{$user->name}}</td>
+                    <td>{{$user->divisi->nama_divisi ?? '-'}}</td>
                     <td>{{$user->email}}</td>                 
                     <td>{{$user->levels->nama_level}}</td>                 
                     <td>

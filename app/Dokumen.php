@@ -11,6 +11,6 @@ class Dokumen extends Model
     public $table = "dokumen";
 
     protected $fillable = [
-        'nama_file', 'keterangan',
+        'nama_file', 'keterangan','uploaded',
     ];
 }
