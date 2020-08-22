@@ -17,25 +17,17 @@
 </div>
 @endif
 
-{{-- <button type="button" class="btn btn-primary my-3" data-toggle="modal" data-target="#importExcel">
-    <i class="fas fa-file-excel"></i> Import Excel
-</button> --}}
-
 <br/>
 
-<a href="#" class="btn btn-success" data-toggle="tooltip" title="Print"
-    onclick="">
-    <i class="fas fa-print"></i>
-</a>
 
-<a href="/" class="btn btn-primary">
-    <i class="fa fa-plus nav-icon"></i>
+<a href="/tambahuser" class="btn btn-primary ml-3">
+    Tambah User
 </a>
 
 <br/>
 <br/>
 
-<div class="card .mt-3" style="border-top: 2px solid">
+<div class="card .mt-3">
 
     <div class="card-header ">
         <h4>User</h4>
@@ -48,31 +40,28 @@
                     <th class="text-center">No</th>
                     <th class="text-center">Nama</th>
                     <th class="text-center">Email</th>
+                    <th class="text-center">Level</th>
                     <th class="text-center" width="8%">Action</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($users ?? '' as $s)
+                @foreach($users ?? '' as $user)
                 <tr>
                     <td>{{$loop->iteration}}</td>
-                    <td>{{$s->name}}</td>
-                    <td>{{$s->email}}</td>                 
+                    <td>{{$user->name}}</td>
+                    <td>{{$user->email}}</td>                 
+                    <td>{{$user->levels->nama_level}}</td>                 
                     <td>
                         <div class="btn-group">
+                           
 
-                            <!-- URL::to('/admin/category/detail.id='.$cate-id -->
-                            <a href="#" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="bottom"
-                                title="Info">
-                                <i class="fa fa-info-circle nav-icon"></i>
-                            </a>
-
-                            <a href="#" class="btn btn-warning  btn-sm" data-toggle="tootip"
+                            <a href="/tampilubahuser/{{$user->id}}" class="btn btn-outline-success m-1" data-toggle="tootip"
                                 data-placement="bottom" title="Edit">
                                 <i class="fa fa-edit nav-icon"></i>
                             </a>
 
-                            <a onClick="return confirm('Yakin ingin menghapus data?')" href="#"
-                                class="btn btn btn-danger btn-sm">
+                            <a onClick="return confirm('Yakin ingin menghapus data?')" href="hapususer/{{$user->id}}"
+                            class="btn btn-outline-danger m-1">
                                 <i class="fa fa-trash nav-icon"></i>
                             </a>
 

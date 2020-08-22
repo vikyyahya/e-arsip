@@ -40,20 +40,6 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="tlp" class="col-md-4 col-form-label text-md-right">{{ __('No Tlp') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="tlp" type="tlp" class="form-control @error('tlp') is-invalid @enderror" name="tlp" value="{{ old('tlp') }}" required autocomplete="email">
-
-                                @error('tlp')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                             <div class="col-md-6">

@@ -75,6 +75,12 @@
 <script src="{{asset ('lte3/plugins/raphael/raphael.min.js')}}"></script>
 <script src="{{asset ('lte3/plugins/jquery-mapael/jquery.mapael.min.js')}}"></script>
 <script src="{{asset ('lte3/plugins/jquery-mapael/maps/usa_states.min.js')}}"></script>
+<script src="{{asset ('lte3/plugins/bs-custom-file-input/bs-custom-file-input.min.js')}}"></script>
+<script type="text/javascript">
+$(document).ready(function () {
+  bsCustomFileInput.init();
+});
+</script>
 <!-- ChartJS -->
 <script src="{{asset ('lte3/plugins/chart.js/Chart.min.js')}}"></script>
 

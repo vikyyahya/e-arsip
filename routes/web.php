@@ -21,15 +21,19 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
-
 Route::get('/users', 'UserController@user');
+Route::get('/tambahuser', 'UserController@tambah_user');
+Route::post('/buatuser', 'UserController@create');
+Route::get('/tampilubahuser/{id}', 'UserController@ubahuser');
+Route::post('/ubahuser/{id}', 'UserController@ubah');
+Route::get('/hapususer/{id}', 'UserController@hapus');
+//dokument
+Route::get('/datadokumen', 'DokumenController@index');
+Route::get('/tambahdokumen', 'DokumenController@tambah_dokumen');
+Route::post('/unggahdokumen', 'DokumenController@create');
+Route::get('/hapusdokumen/{id}', 'DokumenController@hapus');
+Route::get('/tampilubahdokumen/{id}', 'DokumenController@tampilubah');
+Route::post('/ubahdokumen/{id}', 'DokumenController@ubah');
 
-//design interior
-Route::get('/design-interior', 'DesignInteriorController@index');
 
-//design exterior
-Route::get('/design-exterior', 'DesignExteriorController@index');
-
-//design exterior
-Route::get('/design-logo', 'DesignLogoController@index');
 

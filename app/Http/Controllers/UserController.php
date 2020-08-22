@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 use App\User;
+use App\Level;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+
 
 class UserController extends Controller
 {
@@ -14,12 +17,60 @@ class UserController extends Controller
         return view('user.user', ['users' => $users]);
     }
 
-    public function add_user()
+    public function tambah_user()
     {
-        $users = User::all();
-        return view('user.user', ['users' => $users]);
+        $level = Level::pluck('nama_level', 'id');
+
+        return view('user.addUser', ['level' => $level]);
     }
 
+    public function create(Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'nullable',
+            'email' => 'unique:users,email',
+            'password' => ['required', 'string', 'min:8'],
+            'level' => 'nullable'
+        ]);
+
+        $data = $request->all();
+        User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
+            'level' => $data['level'],
+        ]);
+        return redirect('/users')->with('sukses', 'Data Berhasil Di Input!');
+    }
+
+    public function ubahuser($id){
+        $level = Level::pluck('nama_level', 'id');
+        $user = User::find($id);
+        return view('user.ubahuser',['user' => $user,'level' => $level]);
+
+    }
+
+    public function ubah(Request $request,$id)
+    {
+        $user = User::find($id);
+        $level = Level::pluck('nama_level', 'id');
+        if ($request->password != $request->syncpassword){
+            return view('user.ubahuser',['user' => $user,'level' => $level,'erro'=>'Password tidak sama'])->with('errors', 'Password tidak sama');
+        }
+        else if ($request->password == '') {
+            $user->update($request->except('password'));
+        } else {
+            $user->update($request->all());
+        }
+        return redirect('/users')->with('sukses', 'Data Berhasil Di Update!');
+    }
+
+    public function hapus($id)
+    {
+        $user = User::find($id);
+        $user->delete($user);
+        return redirect('/users')->with('sukses', 'Data berhasil dihapus!');
+    }
 
 
 
