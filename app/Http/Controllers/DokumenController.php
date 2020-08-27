@@ -24,7 +24,7 @@ class DokumenController extends Controller
 
     public function create(Request $request)
     {
-        return $request;
+        // return $request;
         $request->validate([
             'nama_file' => 'required',
             'file' => 'required|max:2048',
@@ -39,7 +39,8 @@ class DokumenController extends Controller
         Dokumen::create([
             'nama_file' => $fileName,
             'keterangan' => $data['keterangan'],
-            'keterangan' => $id_user,
+            'uploaded' => $id_user
+
         ]);
         return redirect('/datadokumen')->with('sukses', 'Data Berhasil Di Upload!');
     }

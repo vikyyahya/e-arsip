@@ -13,6 +13,7 @@
         <style>
             html, body {
                 background-color: #fff;
+                background: url('https://source.unsplash.com/twukN12EN7c/1920x1080') no-repeat center center fixed;
                 color: #636b6f;
                 font-family: 'Nunito', sans-serif;
                 font-weight: 200;
