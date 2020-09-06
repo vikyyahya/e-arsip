@@ -34,14 +34,19 @@
 					<div class="form-group">
 						<label>Password</label>
 						<input type="password" name="password" placeholder="" class="form-control">
-                    </div>
+					</div>
 
 					<div class="form-group">
 						<label>Konfirmasi Password</label>
 						<input type="password" name="syncpassword" placeholder="" class="form-control">
 					</div>
-                    
-                    <div class="form-group">
+
+					<div class="form-group">
+						<label>Divisi</label>
+						{{ Form::select('divisi_id', $divisi, null, ['placeholder' => 'Pilih Divisi...', 'required', 'class' => 'form-control']) }}
+					</div>
+
+					<div class="form-group">
 						<label>Level</label>
 						{{ Form::select('level', $level, null, ['placeholder' => 'Pilih user level...', 'required', 'class' => 'form-control']) }}
 					</div>

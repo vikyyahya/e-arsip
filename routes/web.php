@@ -36,4 +36,8 @@ Route::get('/tampilubahdokumen/{id}', 'DokumenController@tampilubah');
 Route::post('/ubahdokumen/{id}', 'DokumenController@ubah');
 //divisi
 Route::get('/divisi', 'DivisiController@index');
-Route::post('/tambahdivisi', 'DivisiController@tambahdivisi');
+Route::get('/tambahdivisi', 'DivisiController@tambahdivisi');
+Route::post('/createdivisi', 'DivisiController@create');
+Route::post('/updatedivisi/{id}', 'DivisiController@update');
+Route::get('/hapusdivisi/{id}', 'DivisiController@delete');
+Route::get('/tampilubahdivisi/{id}', 'DivisiController@ubahdivisi');

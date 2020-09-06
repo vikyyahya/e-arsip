@@ -8,7 +8,7 @@ class Divisi extends Model
 {
     //
     public $table = "divisi";
-
-   
-
+    protected $fillable = [
+        'nama_divisi', 'deskripsi'
+    ];
 }

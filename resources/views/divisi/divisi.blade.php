@@ -16,6 +16,12 @@
     <i class="icon fas fa-check"></i> {{ $sukses }}
 </div>
 @endif
+@if ($error = Session::get('error'))
+<div class="alert alert-danger alert-block">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    <i class="icon fas fa-check"></i> {{ $error }}
+</div>
+@endif
 
 <br />
 

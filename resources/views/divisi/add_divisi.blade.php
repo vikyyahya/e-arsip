@@ -4,7 +4,7 @@
 
 <div class="row">
     <div class="col-md-12">
-        <form action="/tambahdivisi" method="POST">
+        <form action="/createdivisi" method="POST">
 
             @csrf
 
@@ -28,7 +28,7 @@
 
                     <div class="form-group">
                         <label>Deskripsi</label>
-                        <input type="text" name="diskripsi" placeholder="" class="form-control">
+                        <input type="text" name="deskripsi" placeholder="" class="form-control">
                     </div>
 
                     <div class="card-footer">
