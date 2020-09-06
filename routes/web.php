@@ -34,6 +34,6 @@ Route::post('/unggahdokumen', 'DokumenController@create');
 Route::get('/hapusdokumen/{id}', 'DokumenController@hapus');
 Route::get('/tampilubahdokumen/{id}', 'DokumenController@tampilubah');
 Route::post('/ubahdokumen/{id}', 'DokumenController@ubah');
-
-
-
+//divisi
+Route::get('/divisi', 'DivisiController@index');
+Route::post('/tambahdivisi', 'DivisiController@tambahdivisi');
