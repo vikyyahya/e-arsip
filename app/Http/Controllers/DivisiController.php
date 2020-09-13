@@ -11,7 +11,7 @@ class DivisiController extends Controller
 
     public function index()
     {
-        $users = Divisi::all();
+        $users = Divisi::paginate(5);
         return view('divisi.divisi', ['users' => $users]);
     }
 

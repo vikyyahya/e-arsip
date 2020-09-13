@@ -37,6 +37,18 @@
 
     <div class="card-header ">
         <h4>Divisi</h4>
+        <div class="card-tools mr-1">
+            <form action="/divisi/cari" method="GET">
+                @csrf
+                <div class="input-group input-group-sm" style="width: 250px;">
+                    <input type="text" name="cari" class="form-control float-right" placeholder="Search">
+                    <div class="input-group-append">
+                        <button type="submit" value="cari" class="btn btn-default"><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
     </div>
 
     <div class="card-body">
@@ -71,6 +83,11 @@
                 @endforeach
             </tbody>
         </table>
+    </div>
+    <div class="card-footer clearfix">
+        <ul class="pagination pagination-sm m-0 float-right">
+            {{$users->links()}}
+        </ul>
     </div>
 </div>
 

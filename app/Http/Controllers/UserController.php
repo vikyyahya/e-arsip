@@ -15,7 +15,16 @@ class UserController extends Controller
     //
     public function user()
     {
-        $users = User::all();
+        $users = User::paginate(5);
+        return view('user.user', ['users' => $users]);
+    }
+
+    public function cari(Request $request)
+    {
+        $cari = $request->cari;
+
+        $users = User::where('name', 'like', "%" . $cari . "%")->paginate(5);
+        // return $users->link;
         return view('user.user', ['users' => $users]);
     }
 

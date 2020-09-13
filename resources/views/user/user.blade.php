@@ -17,25 +17,37 @@
 </div>
 @endif
 
-<br/>
+<br />
 
 
 <a href="/tambahuser" class="btn btn-primary ml-3">
     Tambah User
 </a>
 
-<br/>
-<br/>
+<br />
+<br />
 
 <div class="card .mt-3">
 
     <div class="card-header ">
         <h4>User</h4>
+        <div class="card-tools mr-1">
+            <form action="/users/cari" method="GET">
+                @csrf
+                <div class="input-group input-group-sm" style="width: 250px;">
+                    <input type="text" name="cari" class="form-control float-right" placeholder="Search">
+                    <div class="input-group-append">
+                        <button type="submit" value="cari" class="btn btn-default"><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
     </div>
 
     <div class="card-body">
         <table class="table table-striped table-responsive table table-bordered" id="myTable">
-            <thead >
+            <thead>
                 <tr>
                     <th class="text-center">No</th>
                     <th class="text-center">Nama</th>
@@ -51,19 +63,17 @@
                     <td>{{$loop->iteration}}</td>
                     <td>{{$user->name}}</td>
                     <td>{{$user->divisi->nama_divisi ?? '-'}}</td>
-                    <td>{{$user->email}}</td>                 
-                    <td>{{$user->levels->nama_level}}</td>                 
+                    <td>{{$user->email}}</td>
+                    <td>{{$user->levels->nama_level}}</td>
                     <td>
                         <div class="btn-group">
-                           
 
-                            <a href="/tampilubahuser/{{$user->id}}" class="btn btn-outline-success m-1" data-toggle="tootip"
-                                data-placement="bottom" title="Edit">
+
+                            <a href="/tampilubahuser/{{$user->id}}" class="btn btn-outline-success m-1" data-toggle="tootip" data-placement="bottom" title="Edit">
                                 <i class="fa fa-edit nav-icon"></i>
                             </a>
 
-                            <a onClick="return confirm('Yakin ingin menghapus data?')" href="hapususer/{{$user->id}}"
-                            class="btn btn-outline-danger m-1">
+                            <a onClick="return confirm('Yakin ingin menghapus data?')" href="hapususer/{{$user->id}}" class="btn btn-outline-danger m-1">
                                 <i class="fa fa-trash nav-icon"></i>
                             </a>
 
@@ -74,6 +84,11 @@
                 @endforeach
             </tbody>
         </table>
+    </div>
+    <div class="card-footer clearfix">
+        <ul class="pagination pagination-sm m-0 float-right">
+            {{$users->links()}}
+        </ul>
     </div>
 </div>
 

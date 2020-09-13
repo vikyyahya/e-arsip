@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\User;
 use App\Dokumen;
 use Illuminate\Http\Request;
@@ -32,8 +33,8 @@ class DokumenController extends Controller
         $dok = Dokumen::all();
 
         $data = $request->all();
-        $fileName = $request->nama_file.'.'.$request->file->extension();  
-        // return $fileName;
+        $fileName = $request->nama_file . '.' . $request->file->extension();
+        // return $request;
         $request->file->move(public_path('uploads'), $fileName);
         $id_user = Auth::user()->id;
         Dokumen::create([
@@ -48,9 +49,9 @@ class DokumenController extends Controller
     public function hapus($id)
     {
         $user = Dokumen::find($id);
-        if(file_exists(public_path('uploads/'.$user->nama_file))){
-            unlink(public_path('uploads/'.$user->nama_file));
-        }else{
+        if (file_exists(public_path('uploads/' . $user->nama_file))) {
+            unlink(public_path('uploads/' . $user->nama_file));
+        } else {
         }
         $user->delete($user);
         return redirect('/datadokumen')->with('sukses', 'Data berhasil dihapus!');
@@ -60,27 +61,23 @@ class DokumenController extends Controller
     {
         $dok = Dokumen::find($id);
         $nama_file = $dok->nama_file;
-        $nm = explode(".",$nama_file);
+        $nm = explode(".", $nama_file);
 
-        return view('dokumen.ubahdokumen', ['dok' => $dok,'nama_file' => $nm[0]]);
-
-        
+        return view('dokumen.ubahdokumen', ['dok' => $dok, 'nama_file' => $nm[0]]);
     }
 
-    public function ubah(Request $request,$id)
+    public function ubah(Request $request, $id)
     {
         $a = $request;
         $request->validate([
             'nama_file' => 'required',
         ]);
         $dok = Dokumen::find($id);
-        if($request->file != null){
-            $fileName = $request->nama_file.'.'.$request->file->extension();  
+        if ($request->file != null) {
+            $fileName = $request->nama_file . '.' . $request->file->extension();
             // return $fileName;
             $request->file->move(public_path('uploads'), $fileName);
         }
         $dok->update($request->all());
-
     }
-
 }

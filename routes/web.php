@@ -27,6 +27,8 @@ Route::post('/buatuser', 'UserController@create');
 Route::get('/tampilubahuser/{id}', 'UserController@ubahuser');
 Route::post('/ubahuser/{id}', 'UserController@ubah');
 Route::get('/hapususer/{id}', 'UserController@hapus');
+Route::get('/users/cari', 'UserController@cari');
+
 //dokument
 Route::get('/datadokumen', 'DokumenController@index');
 Route::get('/tambahdokumen', 'DokumenController@tambah_dokumen');

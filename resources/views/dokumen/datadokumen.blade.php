@@ -17,35 +17,37 @@
 </div>
 @endif
 
-<br/>
+<br />
 
 
 <a href="/tambahdokumen" class="btn btn-primary ml-3">
     Tambah Dokumen
 </a>
 
-<br/>
-<br/>
+<br />
+<br />
 
 <div class="card .mt-3">
 
     <div class="card-header ">
-        <div class="row">
-            <div class="col-sm-9"> <h4>Data Dokumen</h4></div>
-            <div class=".col-lg-4">
-                <form class="navbar-form" method="post" action="#">
-                        <input type="text"  name="search" style="width: 200px" placeholder="Kata kunci pencarian ..." required="">
-                        <button type="submit" class="btn btn-primary"><i class="icon-search icon-white"> </i> Cari</button>
-                </form>
+        <h4>Data Dokumen</h4>
+        <div class="card-tools mr-1">
+            <form action="/users/cari" method="GET">
+                @csrf
+                <div class="input-group input-group-sm" style="width: 250px;">
+                    <input type="text" name="cari" class="form-control float-right" placeholder="Search">
+                    <div class="input-group-append">
+                        <button type="submit" value="cari" class="btn btn-primary"><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+            </form>
 
-            </div>
         </div>
-       
     </div>
 
     <div class="card-body">
         <table class="table table-striped table-responsive table table-bordered" id="myTable">
-            <thead >
+            <thead>
                 <tr>
                     <th class="text-center">No</th>
                     <th class="text-center">Nama File</th>
@@ -59,24 +61,21 @@
                 <tr>
                     <td>{{$loop->iteration}}</td>
                     <td>{{$dok->nama_file}}</td>
-                    <td>{{$dok->created_at}}</td>                 
-                    <td>{{$dok->keterangan}}</td>                 
+                    <td>{{$dok->created_at}}</td>
+                    <td>{{$dok->keterangan}}</td>
                     <td>
                         <div class="btn-group">
-                           
 
-                            <a href="/tampilubahdokumen/{{$dok->id}}" class="btn btn-outline-success m-1" data-toggle="tootip"
-                                data-placement="bottom" title="Edit">
+
+                            <a href="/tampilubahdokumen/{{$dok->id}}" class="btn btn-outline-success m-1" data-toggle="tootip" data-placement="bottom" title="Edit">
                                 <i class="fa fa-edit nav-icon"></i>
                             </a>
 
-                            <a href="#" class="btn btn-outline-info m-1" data-toggle="tootip"
-                                data-placement="bottom" title="Edit">
+                            <a href="#" class="btn btn-outline-info m-1" data-toggle="tootip" data-placement="bottom" title="Edit">
                                 <i class="fa fa-print nav-icon"></i>
                             </a>
 
-                            <a onClick="return confirm('Yakin ingin menghapus data?')" href="hapusdokumen/{{$dok->id}}"
-                            class="btn btn-outline-danger m-1">
+                            <a onClick="return confirm('Yakin ingin menghapus data?')" href="hapusdokumen/{{$dok->id}}" class="btn btn-outline-danger m-1">
                                 <i class="fa fa-trash nav-icon"></i>
                             </a>
 
