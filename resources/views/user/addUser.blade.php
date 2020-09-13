@@ -4,11 +4,11 @@
 
 <div class="row">
 	<div class="col-md-12">
-		<form action="/buatuser" method="POST">
+		<form action="/buatuser" method="POST" enctype="multipart/form-data">
 
 			@csrf
 
-			<div class="card" style="border-top: 3px solid">
+			<div class="card" style="">
 				<div class="card-header">
 					<h3 class="card-title">Tambah User</h3>
 				</div>
@@ -50,12 +50,24 @@
 						<label>Level</label>
 						{{ Form::select('level', $level, null, ['placeholder' => 'Pilih user level...', 'required', 'class' => 'form-control']) }}
 					</div>
+					<div class="form-group">
+						<label>Foto</label>
+
+						<div class="input-group">
+							<div class="custom-file">
+								<input type="file" class="custom-file-input" id="exampleInputFile" name="file">
+								<label class="custom-file-label" for="exampleInputFile">Choose file</label>
+							</div>
+
+						</div>
+
+					</div>
 
 					<div class="card-footer">
 
-						<a href="/user" class="btn btn-default">Back</a>
+						<a href="/users" class="btn btn-danger">Batal</a>
 						&nbsp;&nbsp;
-						<input type="submit" value="Save" class="pull-right btn btn-primary">
+						<input type="submit" value="Simpan" class="pull-right btn btn-primary">
 
 					</div>
 

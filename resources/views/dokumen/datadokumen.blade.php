@@ -1,7 +1,6 @@
 @extends('home')
 
 @section('content')
-
 {{-- Notifikasi form validasi --}}
 @if ($errors->has('file'))
 <span class="invalid-feedback" role="alert">

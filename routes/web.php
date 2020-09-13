@@ -14,32 +14,42 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
-Route::get('/users', 'UserController@user');
-Route::get('/tambahuser', 'UserController@tambah_user');
-Route::post('/buatuser', 'UserController@create');
-Route::get('/tampilubahuser/{id}', 'UserController@ubahuser');
-Route::post('/ubahuser/{id}', 'UserController@ubah');
-Route::get('/hapususer/{id}', 'UserController@hapus');
-Route::get('/users/cari', 'UserController@cari');
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/', function () {
+        return view('dashboard.dashboard');
+    });
 
-//dokument
-Route::get('/datadokumen', 'DokumenController@index');
-Route::get('/tambahdokumen', 'DokumenController@tambah_dokumen');
-Route::post('/unggahdokumen', 'DokumenController@create');
-Route::get('/hapusdokumen/{id}', 'DokumenController@hapus');
-Route::get('/tampilubahdokumen/{id}', 'DokumenController@tampilubah');
-Route::post('/ubahdokumen/{id}', 'DokumenController@ubah');
-//divisi
-Route::get('/divisi', 'DivisiController@index');
-Route::get('/tambahdivisi', 'DivisiController@tambahdivisi');
-Route::post('/createdivisi', 'DivisiController@create');
-Route::post('/updatedivisi/{id}', 'DivisiController@update');
-Route::get('/hapusdivisi/{id}', 'DivisiController@delete');
-Route::get('/tampilubahdivisi/{id}', 'DivisiController@ubahdivisi');
+    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+    Route::get('/users', 'UserController@user');
+    Route::get('/tambahuser', 'UserController@tambah_user');
+    Route::post('/buatuser', 'UserController@create');
+    Route::get('/tampilubahuser/{id}', 'UserController@ubahuser');
+    Route::post('/ubahuser/{id}', 'UserController@ubah');
+    Route::get('/hapususer/{id}', 'UserController@hapus');
+    Route::get('/users/cari', 'UserController@cari');
+
+    //dokument
+    Route::get('/datadokumen', 'DokumenController@index');
+    Route::get('/tambahdokumen', 'DokumenController@tambah_dokumen');
+    Route::post('/unggahdokumen', 'DokumenController@create');
+    Route::get('/hapusdokumen/{id}', 'DokumenController@hapus');
+    Route::get('/tampilubahdokumen/{id}', 'DokumenController@tampilubah');
+    Route::post('/ubahdokumen/{id}', 'DokumenController@ubah');
+    //divisi
+    Route::get('/divisi', 'DivisiController@index');
+    Route::get('/tambahdivisi', 'DivisiController@tambahdivisi');
+    Route::post('/createdivisi', 'DivisiController@create');
+    Route::post('/updatedivisi/{id}', 'DivisiController@update');
+    Route::get('/hapusdivisi/{id}', 'DivisiController@delete');
+    Route::get('/tampilubahdivisi/{id}', 'DivisiController@ubahdivisi');
+
+    //kelola akun
+    Route::get('/kelolaakun', 'KelolaAkunController@index');
+    Route::post('/ubahprofil/{id}', 'KelolaAkunController@ubah');
+});

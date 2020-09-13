@@ -4,7 +4,7 @@
 
 <div class="row">
 	<div class="col-md-12">
-		<form action="/ubahuser/{{$user->id}}" method="POST">
+		<form action="/ubahuser/{{$user->id}}" method="POST" enctype="multipart/form-data">
 
 			@csrf
 
@@ -48,6 +48,19 @@
 					<div class="form-group">
 						<label>Level</label>
 						{{ Form::select('level', $level, $user->level, ['placeholder' => 'Pilih user level...', 'required', 'class' => 'form-control']) }}
+					</div>
+
+					<div class="form-group">
+						<label>Foto</label>
+
+						<div class="input-group">
+							<div class="custom-file">
+								<input type="file" value="{{ URL::asset('/uploads/'.$user->foto) }}" class="custom-file-input" id="exampleInputFile" name="file">
+								<label value="{{$user->foto}}" class="custom-file-label" for="exampleInputFile">{{$user->foto ?? 'Choose file'}}</label>
+							</div>
+
+						</div>
+
 					</div>
 
 					<div class="card-footer">
