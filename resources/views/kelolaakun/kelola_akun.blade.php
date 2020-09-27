@@ -3,8 +3,8 @@
 @section('content')
 
 <div>
-    <div class="text-center">
-        <img class="profile-user-img img-fluid img-circle" src="{{ URL::to('/') }}/uploads/{{$foto}}" alt="User profile picture">
+    <div id="img_profile" onclick="upload" class="text-center mt-5">
+        <img class="profile-user-img img-fluid img-circle my-3" style="width:200px; height:200px;" src="{{ URL::to('/') }}/uploads/{{$foto}}" alt="User profile picture">
     </div>
 
     <h3 class="profile-username text-center">{{$user->name}}</h3>
@@ -31,7 +31,7 @@
     </div>
     @endif
 
-    <form action="/ubahprofil/{{$user->id}}" method="POST">
+    <form action="/ubahprofil/{{$user->id}}" method="POST" enctype="multipart/form-data">
         @csrf
 
         <div class="card card-primary m-3">
@@ -61,6 +61,19 @@
                     <input type="password" name="new_password" required placeholder="" class="form-control">
                 </div>
 
+                <div class="form-group">
+                    <label>Foto</label>
+
+                    <div class="input-group">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="exampleInputFile" name="file">
+                            <label class="custom-file-label" for="exampleInputFile">Pilih File</label>
+                        </div>
+
+                    </div>
+
+                </div>
+
                 <input type="submit" value="Ubah Profil" class="pull-right btn btn-primary">
 
             </div>
@@ -70,5 +83,7 @@
     </form>
 
 </div>
+
+
 
 @endsection

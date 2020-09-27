@@ -4,11 +4,11 @@
 
 <div class="row">
 	<div class="col-md-12">
-		<form action="/unggahdokumen" method="POST"  enctype="multipart/form-data">
+		<form action="/unggahdokumen" method="POST" enctype="multipart/form-data">
 
 			@csrf
 
-			<div class="card" style="border-top: 3px solid">
+			<div class="card">
 				<div class="card-header">
 					<h3 class="card-title">Tambah Dokumen</h3>
 				</div>
@@ -32,17 +32,17 @@
 					</div>
 
 					<div class="form-group">
-                        <label>File</label>
+						<label>File</label>
 
-                        <div class="input-group">
-                            <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="exampleInputFile" name="file">
-                                <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                            </div>
-                          
-                        </div>
+						<div class="input-group">
+							<div class="custom-file">
+								<input type="file" class="custom-file-input" id="exampleInputFile" name="file">
+								<label class="custom-file-label" for="exampleInputFile">Choose file</label>
+							</div>
 
-                    </div>
+						</div>
+
+					</div>
 
 					<div class="card-footer">
 

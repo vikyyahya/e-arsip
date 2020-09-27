@@ -45,10 +45,24 @@ class KelolaAkunController extends Controller
             return redirect('/kelolaakun')->with('error', 'Password lama tidak sama!');
         } else {
 
-            $user->update([
-                'name' => $data['name'],
-                'password' => Hash::make($data['new_password']),
-            ]);
+            if ($request->file == null) {
+                $user->update([
+                    'name' => $data['name'],
+                    'password' => Hash::make($data['new_password']),
+                ]);
+            } else {
+                $data = $request->all();
+                $date_time = date("Y-m-d h:i:s", time());
+                $fileName = Auth::user()->name . $date_time . '.' . $request->file->extension();
+                $fileName = str_replace(' ', '_', $fileName);
+                $request->file->move(public_path('uploads'), $fileName);
+                $user->update([
+                    'name' => $data['name'],
+                    'foto' => $fileName,
+                    'password' => Hash::make($data['new_password']),
+                ]);
+            }
+
             return redirect('/kelolaakun')->with('sukses', 'Data Berhasil Di Ubah!');
         }
     }

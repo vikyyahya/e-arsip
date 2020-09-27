@@ -45,13 +45,14 @@ class UserController extends Controller
             'password' => ['required', 'string', 'min:8'],
             'level' => 'nullable',
             'divisi_id' => 'nullable',
-            'file' => 'required|max:2048',
+            'file' => 'image|mimes:jpeg,png,jpg|max:2048',
 
         ]);
 
         $data = $request->all();
         $date_time = date("Y-m-d h:i:s", time());
         $fileName = Auth::user()->name . $date_time . '.' . $request->file->extension();
+        $fileName = str_replace(' ', '_', $fileName);
         $request->file->move(public_path('uploads'), $fileName);
 
         User::create([
@@ -110,6 +111,7 @@ class UserController extends Controller
             $data = $request->all();
             $date_time = date("Y-m-d h:i:s", time());
             $fileName = Auth::user()->name . $date_time . '.' . $request->file->extension();
+            $fileName = str_replace(' ', '_', $fileName);
             $request->file->move(public_path('uploads'), $fileName);
             $user->update([
                 'name' => $data['name'],
@@ -126,6 +128,7 @@ class UserController extends Controller
             $data = $request->all();
             $date_time = date("Y-m-d h:i:s", time());
             $fileName = Auth::user()->name . $date_time . '.' . $request->file->extension();
+            $fileName = str_replace(' ', '_', $fileName);
             $request->file->move(public_path('uploads'), $fileName);
             $pass =  Hash::make($request->password);
             $user->update([

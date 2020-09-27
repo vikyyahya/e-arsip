@@ -8,7 +8,7 @@
 
             @csrf
 
-            <div class="card" style="border-top: 3px solid">
+            <div class="card m-5">
                 <div class="card-header">
                     <h3 class="card-title">Tambah Divisi</h3>
                 </div>

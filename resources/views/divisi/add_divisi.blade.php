@@ -3,12 +3,12 @@
 @section('content')
 
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 mt-4">
         <form action="/createdivisi" method="POST">
 
             @csrf
 
-            <div class="card" style="border-top: 3px solid">
+            <div class="card m-3">
                 <div class="card-header">
                     <h3 class="card-title">Tambah Divisi</h3>
                 </div>
@@ -33,9 +33,9 @@
 
                     <div class="card-footer">
 
-                        <a href="/user" class="btn btn-default">Back</a>
+                        <a href="/user" class="btn btn-default">Batal</a>
                         &nbsp;&nbsp;
-                        <input type="submit" value="Save" class="pull-right btn btn-primary">
+                        <input type="submit" value="Simpan" class="pull-right btn btn-primary">
 
                     </div>
 

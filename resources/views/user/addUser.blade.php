@@ -3,12 +3,12 @@
 @section('content')
 
 <div class="row">
-	<div class="col-md-12">
+	<div class="col-md-12 mt-3">
 		<form action="/buatuser" method="POST" enctype="multipart/form-data">
 
 			@csrf
 
-			<div class="card" style="">
+			<div class="card m-3">
 				<div class="card-header">
 					<h3 class="card-title">Tambah User</h3>
 				</div>
