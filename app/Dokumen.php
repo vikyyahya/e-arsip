@@ -11,6 +11,11 @@ class Dokumen extends Model
     public $table = "dokumen";
 
     protected $fillable = [
-        'nama_file', 'keterangan','uploaded',
+        'nama_file', 'keterangan', 'uploaded',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo('App\User', 'uploaded', 'id');
+    }
 }

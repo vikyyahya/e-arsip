@@ -54,7 +54,7 @@
     <div class="card-body">
         <table class="table table-striped table-responsive table table-bordered" id="myTable">
             <thead>
-                <tr>
+                <tr class="table-primary">
                     <th class="text-center">No</th>
                     <th class="text-center">Nama Divisi</th>
                     <th class="text-center">Deskripsi</th>
@@ -69,10 +69,10 @@
                     <td>{{$user->deskripsi}}</td>
                     <td>
                         <div class="btn-group">
-                            <a href="/tampilubahdivisi/{{$user->id}}" class="btn btn-outline-success m-1" data-toggle="tootip" data-placement="bottom" title="Edit">
+                            <a href="/tampilubahdivisi/{{$user->id}}" class="btn btn-outline-success m-1" data-toggle="tootip" data-placement="bottom" title="Ubah">
                                 <i class="fa fa-edit nav-icon"></i>
                             </a>
-                            <a onClick="return confirm('Yakin ingin menghapus data?')" href="hapusdivisi/{{$user->id}}" class="btn btn-outline-danger m-1">
+                            <a onClick="return confirm('Yakin ingin menghapus data?')" href="hapusdivisi/{{$user->id}}" class="btn btn-outline-danger m-1" title="Hapus">
                                 <i class="fa fa-trash nav-icon"></i>
                             </a>
 

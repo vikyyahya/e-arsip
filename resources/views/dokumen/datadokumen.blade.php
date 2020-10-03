@@ -31,10 +31,10 @@
     <div class="card-header ">
         <h4>Data Dokumen</h4>
         <div class="card-tools mr-1">
-            <form action="/users/cari" method="GET">
+            <form action="/dokumen/cari" method="GET">
                 @csrf
                 <div class="input-group input-group-sm" style="width: 250px;">
-                    <input type="text" name="cari" class="form-control float-right" placeholder="Search">
+                    <input type="text" name="cari" class="form-control float-right" placeholder="Cari Nama/Keterangan">
                     <div class="input-group-append">
                         <button type="submit" value="cari" class="btn btn-primary"><i class="fas fa-search"></i></button>
                     </div>
@@ -47,7 +47,7 @@
     <div class="card-body">
         <table class="table table-striped table-responsive table table-bordered" id="myTable">
             <thead>
-                <tr>
+                <tr class="table-primary">
                     <th class="text-center">No</th>
                     <th class="text-center">Nama File</th>
                     <th class="text-center">Tanggal Upload</th>
@@ -56,7 +56,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($dok ?? '' as $dok)
+                @foreach($dokumen ?? '' as $dok)
                 <tr>
                     <td>{{$loop->iteration}}</td>
                     <td>{{$dok->nama_file}}</td>
@@ -66,15 +66,15 @@
                         <div class="btn-group">
 
 
-                            <a href="/tampilubahdokumen/{{$dok->id}}" class="btn btn-outline-success m-1" data-toggle="tootip" data-placement="bottom" title="Edit">
+                            <a href="/tampilubahdokumen/{{$dok->id}}" class="btn btn-outline-success m-1" data-toggle="tootip" data-placement="bottom" title="Ubah">
                                 <i class="fa fa-edit nav-icon"></i>
                             </a>
 
-                            <a href="#" class="btn btn-outline-info m-1" data-toggle="tootip" data-placement="bottom" title="Edit">
+                            <a href="/export_dokumen/{{$dok->id}}" class="btn btn-outline-info m-1" data-toggle="tootip" data-placement="bottom" title="Cetak">
                                 <i class="fa fa-print nav-icon"></i>
                             </a>
 
-                            <a onClick="return confirm('Yakin ingin menghapus data?')" href="hapusdokumen/{{$dok->id}}" class="btn btn-outline-danger m-1">
+                            <a onClick="return confirm('Yakin ingin menghapus data?')" href="hapusdokumen/{{$dok->id}}" class="btn btn-outline-danger m-1" title="Hapus">
                                 <i class="fa fa-trash nav-icon"></i>
                             </a>
 
@@ -85,6 +85,11 @@
                 @endforeach
             </tbody>
         </table>
+    </div>
+    <div class="card-footer clearfix">
+        <ul class="pagination pagination-sm m-0 float-right">
+            {{$dokumen->links()}}
+        </ul>
     </div>
 </div>
 

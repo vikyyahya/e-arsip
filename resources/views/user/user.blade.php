@@ -9,6 +9,12 @@
 </span>
 @endif
 
+@if($errors->any())
+<div class="alert alert-danger">
+    {{implode('', $errors->all(':message'))}}
+</div>
+@endif
+
 {{-- notifikasi sukses --}}
 @if ($sukses = Session::get('sukses'))
 <div class="alert alert-success alert-block">
@@ -35,7 +41,7 @@
             <form action="/users/cari" method="GET">
                 @csrf
                 <div class="input-group input-group-sm" style="width: 250px;">
-                    <input type="text" name="cari" class="form-control float-right" placeholder="Search">
+                    <input type="text" name="cari" class="form-control float-right" placeholder="Cari Nama">
                     <div class="input-group-append">
                         <button type="submit" value="cari" class="btn btn-default"><i class="fas fa-search"></i></button>
                     </div>
@@ -48,7 +54,7 @@
     <div class="card-body">
         <table class="table table-striped table-responsive table table-bordered" id="myTable">
             <thead>
-                <tr>
+                <tr class="table-primary">
                     <th class="text-center">No</th>
                     <th class="text-center">Nama</th>
                     <th class="text-center">Divisi</th>
@@ -60,7 +66,7 @@
             <tbody>
                 @foreach($users ?? '' as $user)
                 <tr>
-                    <td>{{$loop->iteration}}</td>
+                    <td>{{ ($users->currentpage()-1) * $users->perpage() + $loop->index + 1 }}</td>
                     <td>{{$user->name}}</td>
                     <td>{{$user->divisi->nama_divisi ?? '-'}}</td>
                     <td>{{$user->email}}</td>
@@ -69,11 +75,11 @@
                         <div class="btn-group">
 
 
-                            <a href="/tampilubahuser/{{$user->id}}" class="btn btn-outline-success m-1" data-toggle="tootip" data-placement="bottom" title="Edit">
+                            <a href="/tampilubahuser/{{$user->id}}" class="btn btn-outline-success m-1" data-toggle="tootip" data-placement="bottom" title="Ubah">
                                 <i class="fa fa-edit nav-icon"></i>
                             </a>
 
-                            <a onClick="return confirm('Yakin ingin menghapus data?')" href="hapususer/{{$user->id}}" class="btn btn-outline-danger m-1">
+                            <a onClick="return confirm('Yakin ingin menghapus data?')" href="hapususer/{{$user->id}}" class="btn btn-outline-danger m-1" title="Hapus">
                                 <i class="fa fa-trash nav-icon"></i>
                             </a>
 

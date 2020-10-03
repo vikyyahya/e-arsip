@@ -6,6 +6,8 @@ use App\User;
 use App\Dokumen;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Barryvdh\DomPDF\Facade as PDF;
+
 
 
 class DokumenController extends Controller
@@ -13,9 +15,21 @@ class DokumenController extends Controller
     //
     public function index()
     {
-        $dok = Dokumen::all();
-        return view('dokumen.datadokumen', ['dok' => $dok]);
+        $dok = Dokumen::with('user')->wherehas('user', function ($q) {
+            $q->where('id', Auth::user()->id);
+        })->paginate(5);
+        return view('dokumen.datadokumen', ['dokumen' => $dok]);
     }
+    public function cari(Request $request)
+    {
+        $cari = $request->cari;
+
+        $dok = Dokumen::where('nama_file', 'like', "%" . $cari . "%")
+            ->orwhere('keterangan', 'like', "%" . $cari . "%")->paginate(5);
+        // return $users->link;
+        return view('dokumen.datadokumen', ['dokumen' => $dok]);
+    }
+
 
     public function tambah_dokumen()
     {
@@ -79,5 +93,18 @@ class DokumenController extends Controller
             $request->file->move(public_path('uploads'), $fileName);
         }
         $dok->update($request->all());
+        return redirect('/datadokumen')->with('sukses', 'Data berhasil di ubah!');
+    }
+    public function export($id)
+    {
+        $dokumen = Dokumen::find($id);
+        return view('print.printdokument', ['dokumen' => $dokumen->nama_file]);
+
+        $pdf = PDF::loadview('print.printdokument', ['dokumen' => $dokumen]);
+        $pdf->save(storage_path() . '/uniquename.pdf');
+        return $pdf->stream();
+
+        // return $users;
+        // return (new UserReport($users))->download('users.xlsx');
     }
 }

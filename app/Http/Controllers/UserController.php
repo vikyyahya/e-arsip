@@ -22,11 +22,21 @@ class UserController extends Controller
 
     public function cari(Request $request)
     {
+
+        $errors = new \Illuminate\Support\MessageBag();
+        $errors->add('Error', 'Data tidak di temukan');
+        $cari = $request->cari;
+
         $cari = $request->cari;
 
         $users = User::where('name', 'like', "%" . $cari . "%")->paginate(5);
         // return $users->link;
-        return view('user.user', ['users' => $users]);
+
+        if (count($users) == 0) {
+            return redirect()->back()->withErrors($errors);;
+        } else {
+            return view('user.user', ['users' => $users]);
+        }
     }
 
     public function tambah_user()

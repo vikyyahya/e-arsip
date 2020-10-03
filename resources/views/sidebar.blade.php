@@ -2,7 +2,7 @@
   <!-- Brand Logo -->
   <a href="/" class="brand-link primary">
     <!-- <img src="{{asset('lte3/dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8"> -->
-    <span class="brand-text font-weight-dark">PT Surya Renggo Container</span>
+    <span class="brand-text font-weight-dark">PT Surya Rengo Container</span>
   </a>
 
   <!-- Sidebar -->
@@ -12,10 +12,11 @@
     <!-- Sidebar Menu -->
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
       <div>
-        <img src="{{asset('lte3/dist/img/user2-160x160.jpg')}}" class="rounded-circle" width="400" height="400" alt="User Image">
+        <img class="rounded-circle img-circle" style="width:40px; height:40px;" src="{{ URL::to('/') }}/uploads/{{Auth::user()->foto}}" alt="User profile picture">
+        <!-- <img src="{{ URL::to('/') }}/uploads/{{Auth::user()->foto}}" class="rounded-circle" width="400" height="400" alt="User Image"> -->
       </div>
       <div class="info">
-        <a href="#" class="d-block">{{Auth::user()->name}}</a>
+        <a href="/kelolaakun" class="d-block">{{Auth::user()->name}}</a>
       </div>
     </div>
 

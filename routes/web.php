@@ -41,6 +41,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/hapusdokumen/{id}', 'DokumenController@hapus');
     Route::get('/tampilubahdokumen/{id}', 'DokumenController@tampilubah');
     Route::post('/ubahdokumen/{id}', 'DokumenController@ubah');
+    Route::get('/export_dokumen/{id}', 'DokumenController@export');
+    Route::get('/dokumen/cari', 'DokumenController@cari');
+
+
     //divisi
     Route::get('/divisi', 'DivisiController@index');
     Route::get('/tambahdivisi', 'DivisiController@tambahdivisi');
