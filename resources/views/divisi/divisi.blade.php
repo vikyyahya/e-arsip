@@ -9,6 +9,13 @@
 </span>
 @endif
 
+@if($errors->any())
+<div class="alert alert-danger">
+    {{implode('', $errors->all(':message'))}}
+</div>
+@endif
+
+
 {{-- notifikasi sukses --}}
 @if ($sukses = Session::get('sukses'))
 <div class="alert alert-success alert-block">
@@ -41,7 +48,7 @@
             <form action="/divisi/cari" method="GET">
                 @csrf
                 <div class="input-group input-group-sm" style="width: 250px;">
-                    <input type="text" name="cari" class="form-control float-right" placeholder="Search">
+                    <input type="text" name="cari" class="form-control float-right" placeholder="Cari Divisi">
                     <div class="input-group-append">
                         <button type="submit" value="cari" class="btn btn-default"><i class="fas fa-search"></i></button>
                     </div>

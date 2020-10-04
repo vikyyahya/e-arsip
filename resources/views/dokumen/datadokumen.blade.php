@@ -1,11 +1,29 @@
 @extends('home')
 
 @section('content')
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.btnprn').printPage();
+    });
+</script>
 {{-- Notifikasi form validasi --}}
 @if ($errors->has('file'))
 <span class="invalid-feedback" role="alert">
     <strong>{{$errors->first('file')}}</strong>
 </span>
+@endif
+
+@if($errors->any())
+<div class="alert alert-danger">
+    {{implode('', $errors->all(':message'))}}
+</div>
+@endif
+
+@if ($suksesdelete = Session::get('suksesdelete'))
+<div class="alert alert-danger alert-block">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    <i class="icon fas fa-check"></i> {{ $suksesdelete }}
+</div>
 @endif
 
 {{-- notifikasi sukses --}}
@@ -18,10 +36,11 @@
 
 <br />
 
-
+@if(Auth::user()->level == 2)
 <a href="/tambahdokumen" class="btn btn-primary ml-3">
     Tambah Dokumen
 </a>
+@endif
 
 <br />
 <br />
@@ -45,7 +64,7 @@
     </div>
 
     <div class="card-body">
-        <table class="table table-striped table-responsive table table-bordered" id="myTable">
+        <table class="table table-striped  table table-bordered" id="myTable">
             <thead>
                 <tr class="table-primary">
                     <th class="text-center">No</th>
@@ -65,18 +84,21 @@
                     <td>
                         <div class="btn-group">
 
-
+                            @if (Auth::user()->level == 2)
                             <a href="/tampilubahdokumen/{{$dok->id}}" class="btn btn-outline-success m-1" data-toggle="tootip" data-placement="bottom" title="Ubah">
                                 <i class="fa fa-edit nav-icon"></i>
                             </a>
+                            <a onClick="return confirm('Yakin ingin menghapus data?')" href="/hapusdokumen/{{$dok->id}}" class="btn btn-outline-danger m-1" title="Hapus">
+                                <i class="fa fa-trash nav-icon"></i>
+                            </a>
 
-                            <a href="/export_dokumen/{{$dok->id}}" class="btn btn-outline-info m-1" data-toggle="tootip" data-placement="bottom" title="Cetak">
+                            @endif
+
+                            <a href="/export_dokumen/{{$dok->id}}" class="btnprn btn btn-outline-info m-1" data-toggle="tootip" data-placement="bottom" title="Cetak">
                                 <i class="fa fa-print nav-icon"></i>
                             </a>
 
-                            <a onClick="return confirm('Yakin ingin menghapus data?')" href="hapusdokumen/{{$dok->id}}" class="btn btn-outline-danger m-1" title="Hapus">
-                                <i class="fa fa-trash nav-icon"></i>
-                            </a>
+
 
                         </div>
                     </td>

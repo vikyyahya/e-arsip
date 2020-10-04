@@ -15,6 +15,21 @@ class DivisiController extends Controller
         return view('divisi.divisi', ['users' => $users]);
     }
 
+    public function cari(Request $request)
+    {
+        $errors = new \Illuminate\Support\MessageBag();
+        $errors->add('Error', 'Data tidak di temukan');
+        $cari = $request->cari;
+
+        $users = Divisi::where('nama_divisi', 'like', '%' . $cari . "%")->paginate(5);
+
+        if (count($users) == 0) {
+            return redirect()->back()->withErrors($errors);;
+        } else {
+            return view('divisi.divisi', ['users' => $users]);
+        }
+    }
+
     public function tambahdivisi()
     {
         $users = Divisi::all();

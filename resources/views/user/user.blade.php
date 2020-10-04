@@ -23,6 +23,13 @@
 </div>
 @endif
 
+@if ($suksesdelete = Session::get('suksesdelete'))
+<div class="alert alert-danger alert-block">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    <i class="icon fas fa-check"></i> {{ $suksesdelete }}
+</div>
+@endif
+
 <br />
 
 

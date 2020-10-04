@@ -36,7 +36,7 @@
           <a href="/users" class="nav-link">
             <i class="nav-icon fas fa-user"></i>
             <p>
-              Master User
+              User
               <span class="right badge badge-danger"></span>
             </p>
           </a>
@@ -46,14 +46,14 @@
           <a href="/divisi" class="nav-link">
             <i class="nav-icon fas fa-list"></i>
             <p>
-              Master Divisi
+              Divisi
               <span class="right badge badge-danger"></span>
             </p>
           </a>
         </li>
         @endif
 
-        @if (Auth::user()->level == 2 )
+        @if (Auth::user()->level == 2 || Auth::user()->level == 3 )
         <li class="nav-item">
           <a href="/datadokumen" class="nav-link">
             <i class="nav-icon fas fa-file"></i>

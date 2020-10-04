@@ -15,6 +15,10 @@ class DokumenController extends Controller
     //
     public function index()
     {
+        if (Auth::user()->level == 3) {
+            $dok = Dokumen::paginate(5);
+            return view('dokumen.datadokumen', ['dokumen' => $dok]);
+        }
         $dok = Dokumen::with('user')->wherehas('user', function ($q) {
             $q->where('id', Auth::user()->id);
         })->paginate(5);
@@ -22,12 +26,17 @@ class DokumenController extends Controller
     }
     public function cari(Request $request)
     {
+        $errors = new \Illuminate\Support\MessageBag();
+        $errors->add('Error', 'Data tidak di temukan');
         $cari = $request->cari;
-
         $dok = Dokumen::where('nama_file', 'like', "%" . $cari . "%")
             ->orwhere('keterangan', 'like', "%" . $cari . "%")->paginate(5);
-        // return $users->link;
-        return view('dokumen.datadokumen', ['dokumen' => $dok]);
+
+        if (count($dok) == 0) {
+            return redirect()->back()->withErrors($errors);;
+        } else {
+            return view('dokumen.datadokumen', ['dokumen' => $dok]);
+        }
     }
 
 
@@ -68,7 +77,7 @@ class DokumenController extends Controller
         } else {
         }
         $user->delete($user);
-        return redirect('/datadokumen')->with('sukses', 'Data berhasil dihapus!');
+        return redirect('/datadokumen')->with('suksesdelete', 'Data berhasil dihapus!');
     }
 
     public function tampilubah($id)
@@ -87,11 +96,20 @@ class DokumenController extends Controller
             'nama_file' => 'required',
         ]);
         $dok = Dokumen::find($id);
+        $fileName = $request->nama_file;
         if ($request->file != null) {
             $fileName = $request->nama_file . '.' . $request->file->extension();
             // return $fileName;
             $request->file->move(public_path('uploads'), $fileName);
+        } else {
+            $extension = explode(".", $dok->nama_file);
+            // return $extension[1];
+            $fileName = $fileName . '.' . $extension[1];
+            // return $fileName;
+            rename(public_path('/uploads/' . $dok->nama_file), public_path('/uploads/' . $fileName));
         }
+        $request['nama_file'] = $fileName;
+
         $dok->update($request->all());
         return redirect('/datadokumen')->with('sukses', 'Data berhasil di ubah!');
     }
@@ -100,7 +118,7 @@ class DokumenController extends Controller
         $dokumen = Dokumen::find($id);
         return view('print.printdokument', ['dokumen' => $dokumen->nama_file]);
 
-        $pdf = PDF::loadview('print.printdokument', ['dokumen' => $dokumen]);
+        $pdf = PDF::loadview('print.printdokument', ['dokumen' => $dokumen->nama_file]);
         $pdf->save(storage_path() . '/uniquename.pdf');
         return $pdf->stream();
 

@@ -62,7 +62,10 @@ class UserController extends Controller
         $data = $request->all();
         $date_time = date("Y-m-d h:i:s", time());
         $fileName = Auth::user()->name . $date_time . '.' . $request->file->extension();
-        $fileName = str_replace(' ', '_', $fileName);
+        $fileName = str_replace(' ', '', $fileName);
+        $fileName = str_replace(':', '', $fileName);
+        $fileName = str_replace('-', '', $fileName);
+        $fileName = str_replace('_', '', $fileName);
         $request->file->move(public_path('uploads'), $fileName);
 
         User::create([
@@ -121,7 +124,10 @@ class UserController extends Controller
             $data = $request->all();
             $date_time = date("Y-m-d h:i:s", time());
             $fileName = Auth::user()->name . $date_time . '.' . $request->file->extension();
-            $fileName = str_replace(' ', '_', $fileName);
+            $fileName = str_replace(' ', '', $fileName);
+            $fileName = str_replace(':', '', $fileName);
+            $fileName = str_replace('-', '', $fileName);
+            $fileName = str_replace('_', '', $fileName);
             $request->file->move(public_path('uploads'), $fileName);
             $user->update([
                 'name' => $data['name'],
@@ -161,6 +167,6 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $user->delete($user);
-        return redirect('/users')->with('sukses', 'Data berhasil dihapus!');
+        return redirect('/users')->with('suksesdelete', 'Data berhasil dihapus!');
     }
 }

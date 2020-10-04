@@ -52,6 +52,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/updatedivisi/{id}', 'DivisiController@update');
     Route::get('/hapusdivisi/{id}', 'DivisiController@delete');
     Route::get('/tampilubahdivisi/{id}', 'DivisiController@ubahdivisi');
+    Route::get('/divisi/cari', 'DivisiController@cari');
+
 
     //kelola akun
     Route::get('/kelolaakun', 'KelolaAkunController@index');
