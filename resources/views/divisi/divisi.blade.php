@@ -71,7 +71,7 @@
             <tbody>
                 @foreach($users ?? '' as $user)
                 <tr>
-                    <td>{{$loop->iteration}}</td>
+                    <td>{{ ($users->currentpage()-1) * $users->perpage() + $loop->index + 1 }}</td>
                     <td>{{$user->nama_divisi}}</td>
                     <td>{{$user->deskripsi}}</td>
                     <td>

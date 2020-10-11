@@ -77,7 +77,8 @@
             <tbody>
                 @foreach($dokumen ?? '' as $dok)
                 <tr>
-                    <td>{{$loop->iteration}}</td>
+                    <td>{{ ($dokumen->currentpage()-1) * $dokumen->perpage() + $loop->index + 1 }}</td>
+
                     <td>{{$dok->nama_file}}</td>
                     <td>{{$dok->created_at}}</td>
                     <td>{{$dok->keterangan}}</td>
