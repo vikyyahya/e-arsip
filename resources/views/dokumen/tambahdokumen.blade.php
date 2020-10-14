@@ -46,9 +46,9 @@
 
 					<div class="card-footer">
 
-						<a href="/user" class="btn btn-default">Back</a>
+						<a href="/user" class="btn btn-default">Kembali</a>
 						&nbsp;&nbsp;
-						<input type="submit" value="Save" class="pull-right btn btn-primary">
+						<input type="submit" value="Simpan" class="pull-right btn btn-primary">
 
 					</div>
 

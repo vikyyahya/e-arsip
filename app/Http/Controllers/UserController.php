@@ -145,6 +145,9 @@ class UserController extends Controller
             $date_time = date("Y-m-d h:i:s", time());
             $fileName = Auth::user()->name . $date_time . '.' . $request->file->extension();
             $fileName = str_replace(' ', '_', $fileName);
+            $fileName = str_replace(' ', '', $fileName);
+            $fileName = str_replace(':', '', $fileName);
+            $fileName = str_replace('-', '', $fileName);
             $request->file->move(public_path('uploads'), $fileName);
             $pass =  Hash::make($request->password);
             $user->update([
